@@ -15,40 +15,19 @@
         "${workspaceFolder}/${workspaceFolderBasename}.pdx"
       ],
       "presentation": {
+        "panel": "shared",
+        "reveal": "silent",
         "showReuseMessage": false
       },
-      "problemMatcher": [
-        {
-          "owner": "lua",
-          "fileLocation": "absolute",
-          "pattern": {
-            "regexp": "^(error): (.+):(\\d+): (.+)$",
-            "severity": 1,
-            "file": 2,
-            "line": 3,
-            "message": 4
-          }
+      "problemMatcher": {
+        "owner": "lua",
+        "pattern": {
+          "regexp": "^(warning|error):\\s+(.*):(\\d+):\\s+(.*)$",
+          "severity": 1,
+          "file": 2,
+          "line": 3,
+          "message": 4
         }
-      ]
-    },
-    {
-      "label": "Run (Simulator)",
-      "detail": "Run the current build in the Playdate Simulator",
-      "type": "shell",
-      "command": "open",
-      "args": [
-        "-a",
-        "${env:PLAYDATE_SDK_PATH}/bin/Playdate Simulator.app",
-        "${workspaceFolder}/${workspaceFolderBasename}.pdx"
-      ]
-    },
-    {
-      "label": "Build and Run (Simulator)",
-      "detail": "",
-      "dependsOn": ["Build", "Run (Simulator)"],
-      "dependsOrder": "sequence",
-      "presentation": {
-        "showReuseMessage": false
       },
       "group": {
         "kind": "build",
