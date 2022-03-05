@@ -1,6 +1,6 @@
-name=
-author=
-description=
-bundleID=
+name=Cursed Tetris
+author=Robin Ray
+description=Tetris for Playdate
+bundleID=dev.rray.cranktris
 version=1.0
 buildNumber=1
