@@ -13,8 +13,8 @@
   "Lua.runtime.version": "Lua 5.4",
   // The language server can sort of parse these, but the formatter cannot
   // "Lua.runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="],
-  "Lua.diagnostics.globals": ["playdate"],
-  "Lua.diagnostics.disable": ["lowercase-global"],
+  "Lua.diagnostics.globals": ["playdate", "json"],
+  "Lua.diagnostics.disable": ["lowercase-global", "undefined-field"],
   // Prevent the language server from linting the PlaydateSDK files
   "Lua.diagnostics.libraryFiles": "Disable"
 }
