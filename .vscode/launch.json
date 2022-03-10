@@ -8,8 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Run (Simulator)",
-      "program": "${workspaceFolder}/.vscode/run.js",
-      "args": ["${workspaceFolder}/${workspaceFolderBasename}.pdx"],
+      "program": "${workspaceFolder}/.vscode/scripts/run.js",
       "preLaunchTask": "Build"
     }
   ]

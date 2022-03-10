@@ -7,13 +7,8 @@
       "label": "Build",
       "detail": "Build the game",
       "type": "shell",
-      "command": "pdc",
-      "args": [
-        "-sdkpath",
-        "${env:PLAYDATE_SDK_PATH}",
-        "${workspaceFolder}/Source",
-        "${workspaceFolder}/${workspaceFolderBasename}.pdx"
-      ],
+      "command": "node",
+      "args": ["${workspaceFolder}/.vscode/scripts/build.js"],
       "presentation": {
         "panel": "shared",
         "reveal": "silent",
