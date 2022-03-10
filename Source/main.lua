@@ -60,6 +60,9 @@ function pd.update()
         else
             grid:addBlocks(tet:getBlocks())
             setupTet()
+            if tet:isOverlapping() then
+                setupGame()
+            end
         end
     elseif pd.buttonIsPressed(pd.kButtonUp) then
         local _, len = tet:checkCollisionsBy(0, -1)

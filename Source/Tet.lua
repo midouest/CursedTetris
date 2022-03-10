@@ -57,6 +57,10 @@ function Tet:rotateIndex(clockwise)
     return rotIdx
 end
 
+function Tet:isOverlapping()
+    return self.rot:isOverlapping()
+end
+
 function Tet:checkRotateOverlaps(clockwise)
     local nextRotIdx = self:rotateIndex(clockwise)
     if nextRotIdx == self.rotIdx then
