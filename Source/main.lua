@@ -25,6 +25,10 @@ local function setupTet()
 end
 
 function setupGame()
+    if grid ~= nil then
+        grid:remove()
+    end
+
     math.randomseed(pd.getSecondsSinceEpoch())
 
     tets = loadTets()
@@ -47,9 +51,9 @@ end
 setupGame()
 
 function pd.update()
-    if pd.buttonJustPressed(pd.kButtonLeft) then
+    if pd.buttonIsPressed(pd.kButtonLeft) then
         tet:moveBy(-1, 0)
-    elseif pd.buttonJustPressed(pd.kButtonRight) then
+    elseif pd.buttonIsPressed(pd.kButtonRight) then
         local _, len = tet:checkCollisionsBy(1, 0)
         if len == 0 then
             tet:moveBy(1, 0)
@@ -57,12 +61,12 @@ function pd.update()
             grid:addBlocks(tet:getBlocks())
             setupTet()
         end
-    elseif pd.buttonJustPressed(pd.kButtonUp) then
+    elseif pd.buttonIsPressed(pd.kButtonUp) then
         local _, len = tet:checkCollisionsBy(0, -1)
         if len == 0 then
             tet:moveBy(0, -1)
         end
-    elseif pd.buttonJustPressed(pd.kButtonDown) then
+    elseif pd.buttonIsPressed(pd.kButtonDown) then
         local _, len = tet:checkCollisionsBy(0, 1)
         if len == 0 then
             tet:moveBy(0, 1)
