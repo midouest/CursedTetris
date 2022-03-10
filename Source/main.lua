@@ -13,10 +13,6 @@ import "Tet"
 local pd<const> = playdate
 local gfx<const> = pd.graphics
 
-local wallSize<const> = 10
-local xGridInit<const> = 0
-local yGridInit<const> = math.floor(kGridHeight / 2)
-
 local function setupTet()
     if tet ~= nil then
         tet:remove()
@@ -24,7 +20,7 @@ local function setupTet()
 
     tetIdx = math.random(1, #tets)
     tet = tets[tetIdx]:copy()
-    tet:moveTo(xGridInit, yGridInit)
+    tet:moveTo(kXGridInit, kYGridInit)
     tet:add()
 end
 
@@ -34,11 +30,11 @@ function setupGame()
     tets = loadTets()
     grid = Grid(kGridWidth, kGridHeight)
 
-    wall1 = gfx.sprite
-                .addEmptyCollisionSprite(0, -wallSize, kLCDWidth, wallSize)
+    wall1 = gfx.sprite.addEmptyCollisionSprite(0, -kWallSize, kLCDWidth,
+                                               kWallSize)
     wall2 = gfx.sprite.addEmptyCollisionSprite(0, kLCDHeight, kLCDWidth,
-                                               wallSize)
-    floor = gfx.sprite.addEmptyCollisionSprite(kLCDWidth, 0, wallSize,
+                                               kWallSize)
+    floor = gfx.sprite.addEmptyCollisionSprite(kLCDWidth, 0, kWallSize,
                                                kLCDHeight)
 
     setupGridCollision(wall1)
