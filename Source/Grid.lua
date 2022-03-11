@@ -5,7 +5,9 @@ function setupGridCollision(sprite)
     sprite:setCollidesWithGroups({kGroupTet})
 end
 
-function Grid:init(w, h)
+function Grid:init(x, y, w, h)
+    self.x = x
+    self.y = y
     self.w = w
     self.h = h
     self.sprites = table.create(w * h, 0)
@@ -21,7 +23,7 @@ function Grid:remove()
 end
 
 function Grid:gridToIndex(x, y)
-    return x * self.h + y + 1
+    return (y - self.y) * self.w + (x - self.x) + 1
 end
 
 function Grid:addBlocks(xGrid, yGrid, blocks)
@@ -41,9 +43,9 @@ function Grid:updateFilledRows()
     local i = 1
     local filledRows = {}
     local filledCount = 0
-    for x = 1, self.w do
+    for y = 1, self.h do
         local filled = true
-        for _ = 1, self.h do
+        for _ = 1, self.w do
             if self.sprites[i] == nil then
                 filled = false
             end
@@ -51,7 +53,7 @@ function Grid:updateFilledRows()
         end
 
         if filled then
-            filledRows[x] = true
+            filledRows[y] = true
             filledCount = filledCount + 1
         end
     end
@@ -60,9 +62,9 @@ function Grid:updateFilledRows()
         return
     end
 
-    for x, _ in pairs(filledRows) do
-        for y = 1, self.h do
-            local i = (x - 1) * self.h + y
+    for y, _ in pairs(filledRows) do
+        for x = 1, self.w do
+            local i = (y - 1) * self.w + x
             local sprite = self.sprites[i]
             sprite:remove()
             self.sprites[i] = nil
@@ -70,17 +72,17 @@ function Grid:updateFilledRows()
     end
 
     local shiftDown = 0
-    for x = self.w, 1, -1 do
-        if filledRows[x] then
+    for y = self.h, 1, -1 do
+        if filledRows[y] then
             shiftDown = shiftDown + 1
         elseif shiftDown > 0 then
-            for y = 1, self.h do
-                local i = (x - 1) * self.h + y
+            for x = 1, self.w do
+                local i = (y - 1) * self.w + x
                 local sprite = self.sprites[i]
                 if sprite ~= nil then
                     self.sprites[i] = nil
-                    sprite:moveBy(shiftDown * kSpriteSize, 0)
-                    local j = (x - 1 + shiftDown) * self.h + y
+                    sprite:moveBy(0, shiftDown * kSpriteSize)
+                    local j = (y - 1 + shiftDown) * self.w + x
                     self.sprites[j] = sprite
                 end
             end
