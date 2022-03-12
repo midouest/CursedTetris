@@ -12,8 +12,8 @@ kGridY = 0
 kGridWidth = math.floor(kLCDHeight / kSpriteSize)
 kGridHeight = math.floor(kLCDHeight / kSpriteSize)
 
-kXGridInit = kGridX + math.floor(kGridWidth / 2) - 2
-kYGridInit = -1
+kXGridInit = kGridX + math.floor(kGridWidth / 2)
+kYGridInit = 0
 
 kCW = true
 kCCW = false

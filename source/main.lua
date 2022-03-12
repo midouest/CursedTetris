@@ -20,7 +20,7 @@ local function setupTet()
 
     tetIdx = math.random(1, #tets)
     tet = tets[tetIdx]:copy()
-    tet:moveTo(kXGridInit, kYGridInit)
+    tet:moveTo(kXGridInit + tet.xStart, kYGridInit + tet.yStart)
     tet:add()
 end
 

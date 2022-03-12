@@ -33,7 +33,7 @@ local function loadTet(layerJSON, imageTable, xOff, yOff, w, h, nRotations)
         table.insert(rotations, rotation)
         x = x + w
     end
-    return Tet(0, 0, rotations)
+    return Tet(rotations)
 end
 
 function loadTets()
@@ -53,20 +53,38 @@ function loadTets()
     local tetrominoes = {}
 
     local tetI = loadTet(layerJSON, imageTable, 0, 0, 4, 4, 2)
-
+    tetI.xStart = -2
+    tetI.yStart = -2
     table.insert(tetrominoes, tetI)
-    local tetO = loadTet(layerJSON, imageTable, 8, 0, 4, 4, 1)
+
+    local tetO = loadTet(layerJSON, imageTable, 9, 1, 2, 2, 1)
     table.insert(tetrominoes, tetO)
+    tetO.xStart = -1
+
     local tetT = loadTet(layerJSON, imageTable, 0, 4, 3, 3, 4)
     table.insert(tetrominoes, tetT)
+    tetT.xStart = -1
+    tetT.yStart = -1
+
     local tetJ = loadTet(layerJSON, imageTable, 0, 7, 3, 3, 4)
     table.insert(tetrominoes, tetJ)
+    tetJ.xStart = -1
+    tetJ.yStart = -1
+
     local tetL = loadTet(layerJSON, imageTable, 0, 10, 3, 3, 4)
     table.insert(tetrominoes, tetL)
+    tetL.xStart = -1
+    tetL.yStart = -1
+
     local tetZ = loadTet(layerJSON, imageTable, 0, 13, 3, 3, 2)
     table.insert(tetrominoes, tetZ)
+    tetZ.xStart = -1
+    tetZ.yStart = -1
+
     local tetS = loadTet(layerJSON, imageTable, 6, 13, 3, 3, 2)
     table.insert(tetrominoes, tetS)
+    tetS.xStart = -1
+    tetS.yStart = -1
 
     return tetrominoes
 end

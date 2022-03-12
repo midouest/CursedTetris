@@ -1,8 +1,10 @@
 class("Tet").extends(Object)
 
-function Tet:init(xGrid, yGrid, rots, rotIdx)
-    self.xGrid = xGrid
-    self.yGrid = yGrid
+function Tet:init(rots, rotIdx, xStart, yStart, xGrid, yGrid)
+    self.xStart = xStart or 0
+    self.yStart = yStart or 0
+    self.xGrid = xGrid or 0
+    self.yGrid = yGrid or 0
     self.rots = rots
     self.rotIdx = rotIdx or 1
     self.rot = self.rots[self.rotIdx]
@@ -13,7 +15,8 @@ function Tet:copy()
     for i, rot in ipairs(self.rots) do
         rots[i] = rot:copy()
     end
-    return Tet(self.xGrid, self.yGrid, rots, self.rotIdx)
+    return Tet(rots, self.rotIdx, self.xStart, self.yStart, self.xGrid,
+               self.yGrid)
 end
 
 function Tet:getBlocks()
