@@ -32,7 +32,7 @@ local function moveLeft()
 end
 
 function pd.leftButtonDown()
-    leftRepeatTimer = pd.timer.keyRepeatTimer(moveLeft)
+    leftRepeatTimer = pd.timer.keyRepeatTimerWithDelay(300, 50, moveLeft)
 end
 
 function pd.leftButtonUp()
@@ -47,7 +47,7 @@ local function moveRight()
 end
 
 function pd.rightButtonDown()
-    rightRepeatTimer = pd.timer.keyRepeatTimer(moveRight)
+    rightRepeatTimer = pd.timer.keyRepeatTimerWithDelay(200, 50, moveRight)
 end
 
 function pd.rightButtonUp()
@@ -68,7 +68,7 @@ local function moveDown()
 end
 
 function pd.downButtonDown()
-    downRepeatTimer = pd.timer.keyRepeatTimer(moveDown)
+    downRepeatTimer = pd.timer.keyRepeatTimerWithDelay(200, 50, moveDown)
 end
 
 function pd.downButtonUp()
@@ -83,7 +83,7 @@ local function rotateCW()
 end
 
 function pd.AButtonDown()
-    cwRepeatTimer = pd.timer.keyRepeatTimer(rotateCW)
+    cwRepeatTimer = pd.timer.keyRepeatTimerWithDelay(200, 50, rotateCW)
 end
 
 function pd.AButtonUp()
@@ -98,7 +98,7 @@ local function rotateCCW()
 end
 
 function pd.BButtonDown()
-    ccwRepeatTimer = pd.timer.keyRepeatTimer(rotateCCW)
+    ccwRepeatTimer = pd.timer.keyRepeatTimerWithDelay(200, 50, rotateCCW)
 end
 
 function pd.BButtonUp()
