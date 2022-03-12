@@ -1,9 +1,8 @@
 const fs = require("fs");
-const os = require("os");
 const path = require("path");
 const process = require("process");
 
-const infoPath = path.resolve(process.cwd(), "Source", "pdxinfo");
+const infoPath = path.resolve(process.cwd(), "source", "pdxinfo");
 const infoText = fs.readFileSync(infoPath, "utf-8");
 const infoLines = infoText.split("\n");
 

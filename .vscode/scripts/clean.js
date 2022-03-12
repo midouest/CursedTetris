@@ -1,6 +1,6 @@
 const path = require("path");
+const process = require("process");
 const child_process = require("child_process");
-const util = require("util");
 
 const sdkRoot = require("./sdkRoot");
 const pdxInfo = require("./pdxInfo");
@@ -12,28 +12,27 @@ const outputPath = path.resolve(
   pdxInfo.name + ".pdx"
 );
 
-function runMacOS() {
-  const simulatorPath = path.resolve(sdkRoot, "bin", "Playdate Simulator.app");
-  child_process.spawn("/usr/bin/open", ["-a", simulatorPath, outputPath], {
-    stdio: "ignore",
+function cleanMacOS() {
+  child_process.spawn("rm", ["-rf", `"${outputPath}"`], {
+    shell: true,
+    stdio: "inherit",
   });
 }
 
-async function runWin32() {
-  const simulatorPath = path.resolve(sdkRoot, "bin", "PlaydateSimulator.exe");
-  child_process.spawn(`"${simulatorPath}"`, [`"${outputPath}"`], {
+function cleanWindows() {
+  child_process.spawn("rmdir", ["/s", "/q", `"${outputPath}"`], {
     shell: true,
-    stdio: "ignore",
+    stdio: "inherit",
   });
 }
 
 switch (process.platform) {
   case "darwin":
-    runMacOS();
+    cleanMacOS();
     break;
 
   case "win32":
-    runWin32();
+    cleanWindows();
     break;
 
   default:
