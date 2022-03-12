@@ -1,7 +1,0 @@
-name=Cursed Tetris
-author=Robin Ray
-description=Tetris but make it hurt
-bundleID=dev.rray.cursedtetris
-version=1.0
-buildNumber=1
-imagePath=system
