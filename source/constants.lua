@@ -35,3 +35,6 @@ kFloorH = kWallSize
 
 kCW = true
 kCCW = false
+
+kInitialDelay = 100
+kRepeatDelay = 50
