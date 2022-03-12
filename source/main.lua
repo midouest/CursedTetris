@@ -12,16 +12,35 @@ import "Tet"
 
 local pd<const> = playdate
 local gfx<const> = pd.graphics
+local snd<const> = pd.sound
+
+local function chooseNextTetIdx()
+    return math.random(1, #tets)
+end
 
 local function setupTet()
     if tet ~= nil then
         tet:remove()
     end
 
-    tetIdx = math.random(1, #tets)
+    if nextTet ~= nil then
+        nextTet:remove()
+    end
+
+    tetIdx = nextTetIdx
+    nextTetIdx = chooseNextTetIdx()
+
     tet = tets[tetIdx]:copy()
     tet:moveTo(kXGridInit + tet.xStart, kYGridInit + tet.yStart)
     tet:add()
+
+    nextTet = tets[nextTetIdx]:copy()
+    nextTet:moveTo(kXGridNext + tet.xStart, kYGridNext + tet.yStart)
+    nextTet:add()
+
+    if tick ~= nil then
+        tick:reset()
+    end
 end
 
 local function moveLeft()
@@ -111,13 +130,25 @@ function pd.BButtonUp()
 end
 
 function setupGame()
+    if tet ~= nil then
+        tet:remove()
+    end
+    if nextTet ~= nil then
+        nextTet:remove()
+    end
     if grid ~= nil then
         grid:remove()
+    end
+    if tick ~= nil then
+        tick:remove()
+    end
+
+    if tets == nil then
+        tets = loadTets()
     end
 
     math.randomseed(pd.getSecondsSinceEpoch())
 
-    tets = loadTets()
     grid = Grid(kGridX, kGridY, kGridTilesX, kGridTilesY)
 
     wall1 = gfx.sprite.addEmptyCollisionSprite(kWall1X, kWall1Y, kWall1W,
@@ -131,21 +162,13 @@ function setupGame()
     setupGridCollision(wall2)
     setupGridCollision(floor)
 
-    gfx.sprite.setBackgroundDrawingCallback(
-        function(x, y, w, h)
-            if x ~= 0 or y ~= 0 or w ~= kLCDWidth or h ~= kLCDHeight then
-                return
-            end
+    gfx.sprite.setBackgroundDrawingCallback(function()
+        gfx.fillRect(kWall1X, kWall1Y, kWall1W, kWall1H)
+        gfx.fillRect(kWall2X, kWall2Y, kWall2W, kWall2H)
+    end)
 
-            gfx.fillRect(kWall1X, kWall1Y, kWall1W, kWall1H)
-            gfx.fillRect(kWall2X, kWall2Y, kWall2W, kWall2H)
-        end)
-
+    nextTetIdx = chooseNextTetIdx()
     setupTet()
-
-    if tick ~= nil then
-        tick:remove()
-    end
 
     tick = pd.timer.new(1000)
     tick.discardOnCompletion = false
@@ -153,7 +176,33 @@ function setupGame()
     tick.timerEndedCallback = moveDown
 end
 
+function setupSounds()
+    seq = snd.sequence.new("data/korobeiniki.mid")
+    seq:setTempo(1024)
+    local startStep<const> = 0
+    local endStep<const> = seq:getLength()
+    seq:setLoops(startStep, endStep)
+
+    for i = 1, seq:getTrackCount() do
+        local t<const> = seq:getTrackAtIndex(i)
+        local n<const> = t:getPolyphony()
+        if n > 0 then
+            local inst<const> = snd.instrument.new()
+            for _ = 1, n do
+                local s<const> = snd.synth.new(snd.kWaveSquare)
+                s:setVolume(0.2)
+                s:setADSR(0, 0.15, 0.2, 0)
+                inst:addVoice(s)
+            end
+            t:setInstrument(inst)
+        end
+    end
+
+    seq:play()
+end
+
 setupGame()
+setupSounds()
 
 function pd.update()
     if pd.buttonJustPressed(pd.kButtonUp) then

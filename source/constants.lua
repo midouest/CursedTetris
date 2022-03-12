@@ -18,6 +18,13 @@ kGridY = 0
 kXGridInit = (kWallSize + kGridWidth / 2) / kSpriteSize
 kYGridInit = 0
 
+kXGridNext = 20
+kYGridNext = 5
+kXNextBox = (kXGridNext - 3) * kSpriteSize
+kYNextBox = (kYGridNext - 3) * kSpriteSize
+kWNextBox = 4 * kSpriteSize
+kHNextBox = 4 * kSpriteSize
+
 kWall1X = 0
 kWall1Y = 0
 kWall1W = kWallSize
