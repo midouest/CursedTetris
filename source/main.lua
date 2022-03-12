@@ -113,13 +113,14 @@ function setupGame()
     math.randomseed(pd.getSecondsSinceEpoch())
 
     tets = loadTets()
-    grid = Grid(kGridX, kGridY, kGridWidth, kGridHeight)
+    grid = Grid(kGridX, kGridY, kGridTilesX, kGridTilesY)
 
-    wall1 = gfx.sprite.addEmptyCollisionSprite(0, 0, kWallSize, kLCDHeight)
-    wall2 = gfx.sprite.addEmptyCollisionSprite(kWallSize + kLCDHeight, 0,
-                                               kWallSize, kLCDHeight)
-    floor = gfx.sprite.addEmptyCollisionSprite(0, kLCDHeight, kLCDWidth,
-                                               kWallSize)
+    wall1 = gfx.sprite.addEmptyCollisionSprite(kWall1X, kWall1Y, kWall1W,
+                                               kWall1H)
+    wall2 = gfx.sprite.addEmptyCollisionSprite(kWall2X, kWall2Y, kWall2W,
+                                               kWall2H)
+    floor = gfx.sprite.addEmptyCollisionSprite(kFloorX, kFloorY, kFloorW,
+                                               kFloorH)
 
     setupGridCollision(wall1)
     setupGridCollision(wall2)
@@ -131,12 +132,8 @@ function setupGame()
                 return
             end
 
-            gfx.setScreenClipRect(0, 0, kWallSize, kLCDHeight)
-            gfx.fillRect(0, 0, kLCDWidth, kLCDHeight)
-
-            gfx.setScreenClipRect(kWallSize + kLCDHeight, 0, kWallSize,
-                                  kLCDHeight)
-            gfx.fillRect(0, 0, kLCDWidth, kLCDHeight)
+            gfx.fillRect(kWall1X, kWall1Y, kWall1W, kWall1H)
+            gfx.fillRect(kWall2X, kWall2Y, kWall2W, kWall2H)
         end)
 
     setupTet()

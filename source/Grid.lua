@@ -22,7 +22,7 @@ function Grid:remove()
     end
 end
 
-function Grid:gridToIndex(x, y)
+function Grid:toIndex(x, y)
     return (y - self.y) * self.w + (x - self.x) + 1
 end
 
@@ -30,7 +30,7 @@ function Grid:addBlocks(xGrid, yGrid, blocks)
     for _, block in ipairs(blocks) do
         local x = xGrid + block.xTet
         local y = yGrid + block.yTet
-        local i = self:gridToIndex(x, y)
+        local i = self:toIndex(x, y)
         local sprite = block.sprite
         setupGridCollision(sprite)
         self.sprites[i] = sprite
