@@ -4,7 +4,7 @@
   <export target="../Source/Tilemap.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Spritesheet" tilewidth="16" tileheight="16" tilecount="16" columns="4">
-  <image source="../Source/Spritesheet-table-16-16.png" width="64" height="64"/>
+  <image source="../source/images/Spritesheet-table-16-16.png" width="64" height="64"/>
  </tileset>
  <layer id="1" name="Tetrominoes" width="12" height="16">
   <data encoding="csv">
